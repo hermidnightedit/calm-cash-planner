@@ -246,7 +246,7 @@ textarea.input{resize:vertical;min-height:84px;font-size:15px;line-height:1.45}
 
 /* ---- Seller settings ---- */
 const DEMO_MODE = true;             // true = free demo build (sample data, nothing saved)
-const FULL_VERSION_LINK = "";       // your Etsy listing link, shown in demo mode
+const FULL_VERSION_LINK = "https://www.etsy.com/listing/4599771853/adhd-budget-planner-app-for-beginners";       // your Etsy listing link, shown in demo mode
 const APP_VERSION = "1.3";
 
 /* ---- Utilities ---- */
@@ -866,6 +866,7 @@ function sampleData() {
     for (let d = 1; d <= last; d++) {
       const ds = `${k}-${pad(d)}`;
       if (rnd() < 0.85) s.checkins.push(ds);
+      if (back === 0 && d === last) continue; // nothing spent yet today, so the demo opens on a calm number
       spends.forEach(([n, lo, hi, note]) => { const p = n === "Groceries" ? 0.14 : n === "Eating out" ? 0.35 : 0.08; if (rnd() < p) s.tx.push({ id: uid(), type: "expense", amount: round2(lo + rnd() * (hi - lo)), catId: cid(n), note, date: ds, ts: 0 }); });
     }
     if (back > 0) [8, 22].forEach(d => s.tx.push({ id: uid(), type: "income", amount: 1450, catId: null, note: "Paycheck", date: `${k}-${pad(d)}`, ts: 0 }));
