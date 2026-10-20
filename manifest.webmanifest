@@ -1,0 +1,16 @@
+{
+  "name": "Calm Cash Planner",
+  "short_name": "Calm Cash",
+  "description": "A calm, ADHD-friendly budget planner. Know what is safe to spend today.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbf6f1",
+  "theme_color": "#c27a86",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
