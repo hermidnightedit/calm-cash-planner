@@ -1,8 +1,10 @@
 // Calm Cash Planner offline cache. Bump VERSION when you upload a new index.html.
-const VERSION = "calmcash-v1.3";
+// Only removes Calm Cash's own old copies, so the other Her Midnight Edit apps keep theirs.
+const APP = "calmcash";
+const VERSION = APP + "@v1.4";
 const FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); });
-self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== VERSION).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
+self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => (k.startsWith(APP + "@") || k.startsWith("calmcash-v")) && k !== VERSION).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
   const keep = res => { if (res.ok && new URL(e.request.url).origin === location.origin) { const copy = res.clone(); caches.open(VERSION).then(c => c.put(e.request, copy)); } return res; };
